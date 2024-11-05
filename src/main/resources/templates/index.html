@@ -11,14 +11,14 @@
 <h2 class="subtitle">Guitar presets:</h2>
 
 <tr th:each="preset : ${presets}">
-  <a href="preset.html">
     <div class="preset">
-      <h3 class="presetTitle" th:text="${preset.name}"></h3>
-      <div class="presetDesc">
-        <h4 th:text="'by ' + ${preset.user.name}"/>
-      </div>
-    </div>
-  </a>
+    <a th:href="@{/preset/{id}(id=${preset.id})}" rel="next" class="hyperlink">
+            <h3 class="presetTitle" th:text="${preset.name}"></h3>
+            <div class="presetDesc">
+                <h4 th:text="'by ' + ${preset.user.name}"/>
+            </div>
+            </div>
+    </a>
 
 </tr>
 </body>

@@ -5,16 +5,16 @@ import com.maeda.webapp.dao.UserDAO;
 import com.maeda.webapp.entity.Preset;
 import com.maeda.webapp.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class WebPageController {
 
     @RequestMapping("/")
@@ -22,7 +22,7 @@ public class WebPageController {
         ModelAndView modelAndView = new ModelAndView();
         List<Preset> presets = presetDAO.getAllPresets();
         model.addAttribute("presets", presets);
-        modelAndView.setViewName("index.html");
+        modelAndView.setViewName("index");
         return modelAndView;
     }
 
@@ -41,7 +41,7 @@ public class WebPageController {
         User user = userDAO.findUserById(id);
         model.addAttribute("user", user);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user.html");
+        modelAndView.setViewName("user");
         return modelAndView;
     }
     @GetMapping("users")
@@ -49,17 +49,15 @@ public class WebPageController {
         ModelAndView modelAndView = new ModelAndView();
         List<User> users = userDAO.findUsers();
         model.addAttribute("users", users);
-        modelAndView.setViewName("users.html");
+        modelAndView.setViewName("users");
         return modelAndView;
     }
 
     @GetMapping("preset/{id}")
-    public ModelAndView presetPage(Model model, int id) {
-        ModelAndView modelAndView = new ModelAndView();
+    public String presetPage(Model model, @PathVariable int id) {
         Preset preset = presetDAO.findPresetById(id);
         model.addAttribute("preset", preset);
-        modelAndView.setViewName("preset.html");
-        return modelAndView;
+        return "preset";
     }
 
 }

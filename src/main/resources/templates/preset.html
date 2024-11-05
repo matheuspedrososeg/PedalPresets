@@ -4,10 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
-    <title th:text="${preset.name}"></title>
+    <title>Teste</title>
 </head>
 <body>
 <h1 class="title">Banana Pedalz</h1>
+<br>
+<h2 class="title"><span th:text="${preset.name}"></span></h2>
+
+<div class="presetForPresetPage">
+    <h2 class="presetDescForPresetPage"><span th:text="'IR CAB: ' + ${preset.ir_cab}"></span></h2>
+    <h2 class="presetDescForPresetPage"><span th:text="'Reverb: ' + ${preset.reverb}"></span></h2>
+    <h2 class="presetDescForPresetPage"><span th:text="'Preset: ' + ${preset.preset}"></span></h2>
+    <h2 class="presetDescForPresetPage"><span th:text="'Mix: ' + ${preset.mix}"></span></h2>
+    <h2 class="presetDescForPresetPage"><span th:text="'FB: ' + ${preset.fb}"></span></h2>
+    <h2 class="presetDescForPresetPage"><span th:text="'Mod: ' + ${preset.mod}"></span></h2>
+    <h2 class="presetDescForPresetPage"><span th:text="'Tone: ' + ${preset.tone}"></span></h2>
+    <h2 class="presetDescForPresetPage"><span th:text="'Gain: ' + ${preset.gain}"></span></h2>
+    <h2 class="presetDescForPresetPage"><span th:text="'Type: ' + ${preset.type}"></span></h2>
+
+</div>
+
+<a th:href="@{/}" class="anchor" rel="previous">
+    <h3>Voltar.</h3>
+</a>
 
 
 </tr>

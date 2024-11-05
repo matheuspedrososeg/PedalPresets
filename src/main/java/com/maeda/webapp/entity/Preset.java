@@ -41,7 +41,9 @@ public class Preset {
     @Column(name = "type")
     private int type;
 
-    @ManyToOne
+    @ManyToOne(cascade = {
+            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+    })
     @JoinColumn(name = "id_user")
     private User user;
 

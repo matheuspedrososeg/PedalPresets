@@ -8,5 +8,4 @@ public interface PresetDAO {
     Preset findPresetById(int id);
     List<Preset> findPresetByUserId(int id);
     List<Preset> getAllPresets();
-
 }
