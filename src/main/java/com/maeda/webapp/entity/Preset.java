@@ -29,6 +29,9 @@ public class Preset {
     @Column(name = "fb")
     private int fb;
 
+    @Column(name = "time")
+    private int time;
+
     @Column(name = "mod")
     private int mod;
 
@@ -41,26 +44,25 @@ public class Preset {
     @Column(name = "type")
     private int type;
 
-    @ManyToOne(cascade = {
-            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
-    })
-    @JoinColumn(name = "id_user")
-    private User user;
+    @Column(name = "id_user")
+    private String user;
 
     public Preset() {
     }
 
-    public Preset(String name, int ir_cab, int reverb, int preset, int mix, int fb, int mod, int tone, int gain, int type) {
+    public Preset(String name, int ir_cab, int reverb, int preset, int mix, int fb, int time, int mod, int tone, int gain, int type, String id_user) {
         this.name = name;
         this.ir_cab = ir_cab;
         this.reverb = reverb;
         this.preset = preset;
         this.mix = mix;
         this.fb = fb;
+        this.time = time;
         this.mod = mod;
         this.tone = tone;
         this.gain = gain;
         this.type = type;
+        this.user = id_user;
     }
 
     public Long getId() {
@@ -151,12 +153,20 @@ public class Preset {
         this.type = type;
     }
 
-    public User getUser() {
+    public String getId_user() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setId_user(String id_user) {
+        this.user = id_user;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 
     @Override

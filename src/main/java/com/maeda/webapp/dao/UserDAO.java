@@ -7,8 +7,8 @@ import java.util.List;
 public interface UserDAO {
     User findUserById(int id);
     List<User> findUsers();
-    void createUser(String name);
+    User createUser(String name, String password, boolean active);
     void updateUser(String name, int id);
     void deleteUserById(int id);
-
+    void createRole(User user);
 }

@@ -2,9 +2,9 @@ package com.maeda.webapp.impl;
 
 
 import com.maeda.webapp.dao.UserDAO;
+import com.maeda.webapp.entity.Roles;
 import com.maeda.webapp.entity.User;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +35,15 @@ public class UserImpl implements UserDAO {
 
     @Override
     @Transactional
-    public void createUser(String name) {
+    public User createUser(String name, String password, boolean active) {
         User user = new User();
         user.setName(name);
+        user.setPassword("{noop}" + password);
+        user.setActive(active);
+
         entityManager.persist(user);
+
+        return user;
     }
 
     @Override
@@ -55,4 +60,13 @@ public class UserImpl implements UserDAO {
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
     }
+    @Override
+    @Transactional
+    public void createRole(User user) {
+        Roles roles = new Roles();
+        roles.setRole("ROLE_MEMBER");
+        roles.setId_user(user.getName());
+        entityManager.persist(roles);
+    }
+
 }

@@ -3,8 +3,10 @@ package com.maeda.webapp.impl;
 import com.maeda.webapp.dao.PresetDAO;
 import com.maeda.webapp.entity.Preset;
 import com.maeda.webapp.entity.User;
+import com.maeda.webapp.security.UserAuthorizationConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,12 @@ import java.util.List;
 public class PresetImpl implements PresetDAO {
 
     private EntityManager entityManager;
+    private UserAuthorizationConfig userAuthorizationConfig;
 
     @Autowired
-    public PresetImpl(EntityManager entityManager) {
+    public PresetImpl(EntityManager entityManager, UserAuthorizationConfig userAuthorizationConfig) {
         this.entityManager = entityManager;
+        this.userAuthorizationConfig = userAuthorizationConfig;
     }
 
     @Override
@@ -37,5 +41,26 @@ public class PresetImpl implements PresetDAO {
     public List<Preset> getAllPresets() {
         TypedQuery<Preset> query = entityManager.createQuery("from Preset", Preset.class);
         return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void createPreset(String name, int ir_cab, int reverb, int preset, int mix, int fb, int time, int mod, int tone, int gain, int type) {
+        Preset persistingPreset = new Preset();
+        String username = userAuthorizationConfig.getLoggedUser();
+
+        persistingPreset.setName(name);
+        persistingPreset.setIr_cab(ir_cab);
+        persistingPreset.setReverb(reverb);
+        persistingPreset.setPreset(preset);
+        persistingPreset.setMix(mix);
+        persistingPreset.setFb(fb);
+        persistingPreset.setTime(time);
+        persistingPreset.setMod(mod);
+        persistingPreset.setTone(tone);
+        persistingPreset.setGain(gain);
+        persistingPreset.setType(type);
+
+        entityManager.persist(persistingPreset);
     }
 }

@@ -13,8 +13,14 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "name")
     private String name;
+
+    @Column(name = "active")
+    private boolean active;
 
     @OneToMany(mappedBy = "user", cascade = {
             CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
@@ -24,7 +30,8 @@ public class User {
     public User() {
     }
 
-    public User(String name) {
+    public User(String password, String name) {
+        this.password = password;
         this.name = name;
     }
 
@@ -42,6 +49,30 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Preset> getUserPresets() {
+        return userPresets;
+    }
+
+    public void setUserPresets(List<Preset> userPresets) {
+        this.userPresets = userPresets;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override

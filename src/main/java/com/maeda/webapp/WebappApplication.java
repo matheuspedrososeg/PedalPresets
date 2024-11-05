@@ -1,6 +1,8 @@
 package com.maeda.webapp;
 
+import com.maeda.webapp.dao.PresetDAO;
 import com.maeda.webapp.dao.UserDAO;
+import com.maeda.webapp.impl.UserRoleImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,9 +16,19 @@ public class WebappApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(UserDAO userDAO) {
+	public CommandLineRunner commandLineRunner(PresetDAO presetDAO) {
 		return runner -> {
+			createPreset("Overdrive tone",5,40,9,20,15,20,50,80,40,7, presetDAO);
 		};
+	}
+
+	private void createPreset(String name, int ir_cab, int reverb, int preset, int mix, int fb, int time, int mod, int tone, int gain, int type,PresetDAO presetDAO) {
+		presetDAO.createPreset(name, ir_cab, reverb, preset, mix, fb, time, mod, tone, gain, type);
+	}
+
+	private String createUser(String name, String password, boolean active, UserRoleImpl userRole) {
+		userRole.createUserWithRole(name, password, active);
+		return "USER CREATED";
 	}
 
 	private String deleteUser(int i, UserDAO userDAO) {
@@ -27,11 +39,6 @@ public class WebappApplication {
 	private String updateUser(int i, String nome, UserDAO userDAO) {
 		userDAO.updateUser(nome, i);
 		return "User updated successfully!";
-	}
-
-	private String createUser(String name, UserDAO userDAO) {
-		userDAO.createUser(name);
-		return "Created user successfully!";
 	}
 
 }
