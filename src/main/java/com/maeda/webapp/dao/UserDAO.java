@@ -11,4 +11,5 @@ public interface UserDAO {
     void updateUser(String name, int id);
     void deleteUserById(int id);
     void createRole(User user);
+    User findUserByName(String id);
 }

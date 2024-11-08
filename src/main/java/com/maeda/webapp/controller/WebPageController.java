@@ -4,12 +4,13 @@ import com.maeda.webapp.dao.PresetDAO;
 import com.maeda.webapp.dao.UserDAO;
 import com.maeda.webapp.entity.Preset;
 import com.maeda.webapp.entity.User;
+import com.maeda.webapp.security.UserAuthorizationConfig;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class WebPageController {
         List<Preset> presets = presetDAO.getAllPresets();
         model.addAttribute("presets", presets);
         modelAndView.setViewName("index");
+        String username = userAuthorizationConfig.getLoggedUser();
+        model.addAttribute("username", username);
         return modelAndView;
     }
 
@@ -30,10 +33,13 @@ public class WebPageController {
 
     private PresetDAO presetDAO;
 
+    private UserAuthorizationConfig userAuthorizationConfig;
+
     @Autowired
-    public WebPageController(UserDAO userDAO, PresetDAO presetDAO) {
+    public WebPageController(UserDAO userDAO, PresetDAO presetDAO, UserAuthorizationConfig userAuthorizationConfig) {
         this.userDAO = userDAO;
         this.presetDAO = presetDAO;
+        this.userAuthorizationConfig = userAuthorizationConfig;
     }
 
     @GetMapping("users/{id}")
@@ -60,4 +66,19 @@ public class WebPageController {
         return "preset";
     }
 
+    @GetMapping("createPreset/{id}")
+    public String createPresetPage(Model model, @PathVariable String id) {
+        if (id != userAuthorizationConfig.getLoggedUser()) return "non-authenticated";
+        model.addAttribute("userId", id);
+        model.addAttribute("preset", new Preset());
+        return "createpreset";
+    }
+    @PostMapping("/processPreset")
+    public String processPreset(@Valid @ModelAttribute("preset") Preset preset, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "createpreset";
+        }
+        presetDAO.savePreset(preset);
+            return "preset-confirm";
+    }
 }

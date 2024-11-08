@@ -15,6 +15,7 @@ import java.util.List;
 @Service
 public class UserImpl implements UserDAO {
 
+
     private EntityManager entityManager;
 
     @Autowired
@@ -25,6 +26,13 @@ public class UserImpl implements UserDAO {
     @Override
     public User findUserById(int id) {
         return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public User findUserByName(String id) {
+        TypedQuery<User> query = entityManager.createQuery("from User u where u.name= :id", User.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
     }
 
     @Override
@@ -60,6 +68,7 @@ public class UserImpl implements UserDAO {
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
     }
+
     @Override
     @Transactional
     public void createRole(User user) {

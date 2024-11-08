@@ -28,9 +28,11 @@ public class UserAuthorizationConfig {
         return jdbcUserDetailsManager;
     }
 
-    @Bean
     public String getLoggedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
+        if(authentication != null) {
+            return authentication.getName();
+        }
+        return null;
     }
 }

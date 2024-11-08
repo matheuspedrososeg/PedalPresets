@@ -10,12 +10,18 @@
 <h1 class="title">Banana Pedalz</h1>
 <h2 class="subtitle">Guitar presets:</h2>
 
+<div class="createPreset">
+    <a th:href="@{/createPreset/{id}(id=${username})}" rel="next" class="hyperlink">
+        <h3 class="presetText">Create preset.</h3>
+    </a>
+</div>
+
 <tr th:each="preset : ${presets}">
     <div class="preset">
     <a th:href="@{/preset/{id}(id=${preset.id})}" rel="next" class="hyperlink">
             <h3 class="presetTitle" th:text="${preset.name}"></h3>
             <div class="presetDesc">
-                <h4 th:text="'by ' + ${preset.user.name}"/>
+                <h4 th:text="'by ' + ${preset.id_user}"/>
             </div>
             </div>
     </a>

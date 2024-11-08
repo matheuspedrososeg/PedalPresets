@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Create a Preset</title>
+</head>
+<body>
+<h2 class="title">Create a Preset.</h2>
+<br>
+<form th:action="@{/processPreset}" th:object="${preset}" method="post">
+<h3 class="title">Preset name</h3>
+<div class="inputs">
+    <input type="text" th:field="*{name}" autocomplete="off">
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
+    <h3 class="inputs">IR</h3>
+
+    <input type="number" th:field="*{ir_cab}" autocomplete="off">
+
+    <h3 class="inputs">Reverb</h3>
+    <input type="number" th:field="*{reverb}" autocomplete="off">
+
+    <h3 class="inputs">Preset</h3>
+    <input type="number" th:field="*{preset}" autocomplete="off">
+
+    <h3 class="inputs">Mix</h3>
+    <input type="number" th:field="*{mix}" autocomplete="off">
+
+    <h3 class="inputs">FB</h3>
+    <input type="number" th:field="*{fb}" autocomplete="off">
+
+    <h3 class="inputs">Time</h3>
+    <input type="number" th:field="*{time}" autocomplete="off">
+
+    <h3 class="inputs">Phase</h3>
+    <input type="number" th:field="*{mod}" autocomplete="off">
+
+    <h3 class="inputs">Tone</h3>
+    <input type="number" th:field="*{tone}" autocomplete="off">
+
+    <h3 class="inputs">Gain</h3>
+    <input type="number" th:field="*{gain}" autocomplete="off">
+
+    <h3 class="inputs">Type</h3>
+    <input type="number" th:field="*{type}" autocomplete="off">
+
+    <input type="hidden" name="id_user" th:value="${userId}" />
+    <br>
+    <a th:href="@{/}"><button type="submit">Submit</button></a>
+    <br>
+    <a th:href="@{/}" class="anchor" rel="previous">Voltar.</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.maeda.webapp.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "preset")
@@ -11,36 +13,46 @@ public class Preset {
     @Column(name = "id")
     private Long id;
 
+    @NotEmpty(message = "Preset name must not be null")
     @Column(name = "name")
     private String name;
 
+    @Max(value = 10, message = "Maximum IR is 10")
     @Column(name = "ir_cab")
     private int ir_cab;
 
+    @Max(value = 100, message = "Maximum Reverb is 100")
     @Column(name = "reverb")
     private int reverb;
 
     @Column(name = "preset")
     private int preset;
 
+    @Max(value = 100, message = "Maximum mix is 100")
     @Column(name = "mix")
     private int mix;
 
+    @Max(value = 100, message = "Maximum fb is 100")
     @Column(name = "fb")
     private int fb;
 
+    @Max(value = 100, message = "Maximum time is 100")
     @Column(name = "time")
     private int time;
 
+    @Max(value = 100, message = "Maximum mod is 100")
     @Column(name = "mod")
     private int mod;
 
+    @Max(value = 100, message = "Maximum tone is 100")
     @Column(name = "tone")
     private int tone;
 
+    @Max(value = 100, message = "Maximum gain is 100")
     @Column(name = "gain")
     private int gain;
 
+    @Max(value = 10, message = "Maximum Type is 10")
     @Column(name = "type")
     private int type;
 

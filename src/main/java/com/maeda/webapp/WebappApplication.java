@@ -2,11 +2,14 @@ package com.maeda.webapp;
 
 import com.maeda.webapp.dao.PresetDAO;
 import com.maeda.webapp.dao.UserDAO;
+import com.maeda.webapp.entity.Preset;
 import com.maeda.webapp.impl.UserRoleImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 @SpringBootApplication
 public class WebappApplication {
@@ -18,8 +21,14 @@ public class WebappApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(PresetDAO presetDAO) {
 		return runner -> {
-			createPreset("Overdrive tone",5,40,9,20,15,20,50,80,40,7, presetDAO);
+//			createPreset("Overdrive tone",5,40,9,20,15,20,50,80,40,7, presetDAO);
+			findPreset(presetDAO, "teste");
 		};
+	}
+
+	private List<Preset> findPreset(PresetDAO presetDAO, String username) {
+		List<Preset> list = presetDAO.findPresetByUserId(username);
+		return list;
 	}
 
 	private void createPreset(String name, int ir_cab, int reverb, int preset, int mix, int fb, int time, int mod, int tone, int gain, int type,PresetDAO presetDAO) {
