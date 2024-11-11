@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>My presets</title>
+</head>
+<body>
+<h1 class="title">My presets</h1>
+
+<tr th:each="preset : ${presets}">
+
+    <div class="preset">
+        <a th:href="@{/preset/{id}(id=${preset.id})}" rel="next" class="hyperlink">
+            <h3 class="presetTitle" th:text="${preset.name}"></h3>
+            <div class="presetDesc">
+                <h4>by you!</h4>
+            </div>
+    </div>
+    </a>
+</tr>
+
+<div class="createPreset">
+    <a th:href="@{/}" class="anchor bottom-buttons" rel="previous">Voltar.</a>
+</div>
+</body>
+</html>

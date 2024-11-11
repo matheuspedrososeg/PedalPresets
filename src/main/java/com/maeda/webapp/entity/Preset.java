@@ -2,7 +2,9 @@ package com.maeda.webapp.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "preset")
@@ -17,42 +19,61 @@ public class Preset {
     @Column(name = "name")
     private String name;
 
+
+    @NotNull(message = "IR Cab must not be null")
     @Max(value = 10, message = "Maximum IR is 10")
+    @Min(value = 0, message = "Minimum IR is 0")
     @Column(name = "ir_cab")
     private int ir_cab;
 
+    @NotNull(message = "Reverb must not be null")
     @Max(value = 100, message = "Maximum Reverb is 100")
+    @Min(value = 0, message = "Minimum Reverb is 0")
     @Column(name = "reverb")
     private int reverb;
 
     @Column(name = "preset")
     private int preset;
 
+    @NotNull(message = "Mix must not be null")
     @Max(value = 100, message = "Maximum mix is 100")
+    @Min(value = 0, message = "Minimum Mix is 0")
     @Column(name = "mix")
     private int mix;
 
+    @NotNull(message = "FB must not be null")
     @Max(value = 100, message = "Maximum fb is 100")
+    @Min(value = 0, message = "Minimum FB is 0")
     @Column(name = "fb")
     private int fb;
 
+    @NotNull(message = "Time must not be null")
     @Max(value = 100, message = "Maximum time is 100")
+    @Min(value = 0, message = "Minimum Time is 0")
     @Column(name = "time")
     private int time;
 
+    @NotNull(message = "Mod must not be null")
     @Max(value = 100, message = "Maximum mod is 100")
+    @Min(value = 0, message = "Minimum Mod is 0")
     @Column(name = "mod")
     private int mod;
 
+    @NotNull(message = "Tone must not be null")
     @Max(value = 100, message = "Maximum tone is 100")
+    @Min(value = 0, message = "Minimum tone is 0")
     @Column(name = "tone")
     private int tone;
 
+    @NotNull(message = "Gain name must not be null")
     @Max(value = 100, message = "Maximum gain is 100")
+    @Min(value = 0, message = "Minimum gain is 0")
     @Column(name = "gain")
     private int gain;
 
+    @NotNull(message = "Type name must not be null")
     @Max(value = 10, message = "Maximum Type is 10")
+    @Min(value = 0, message = "Minimum type is 0")
     @Column(name = "type")
     private int type;
 

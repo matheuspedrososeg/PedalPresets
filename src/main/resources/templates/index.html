@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
-    <title>User Info</title>
+    <title>Banana Pedals</title>
 </head>
 <body>
-<h1 class="title">Banana Pedalz</h1>
+<h1 class="title">Banana Pedals</h1>
 <h2 class="subtitle">Guitar presets:</h2>
+
+
+<div class="createPreset">
+    <a th:href="@{/myPresets/{id}(id=${username})}" rel="next" class="hyperlink">
+        <h3 class="presetText">Your presets.</h3>
+</div>
 
 <div class="createPreset">
     <a th:href="@{/createPreset/{id}(id=${username})}" rel="next" class="hyperlink">
@@ -25,9 +31,6 @@
             </div>
             </div>
     </a>
-
-
-
 </tr>
 </body>
 </html>

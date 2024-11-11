@@ -68,7 +68,7 @@ public class WebPageController {
 
     @GetMapping("createPreset/{id}")
     public String createPresetPage(Model model, @PathVariable String id) {
-        if (id != userAuthorizationConfig.getLoggedUser()) return "non-authenticated";
+        if (!id.equals(userAuthorizationConfig.getLoggedUser())) return "non-authenticated";
         model.addAttribute("userId", id);
         model.addAttribute("preset", new Preset());
         return "createpreset";
@@ -81,4 +81,25 @@ public class WebPageController {
         presetDAO.savePreset(preset);
             return "preset-confirm";
     }
+
+    @GetMapping("myPresets/{id}")
+    public String showUserPresets(Model model, @PathVariable String id) {
+        if (!id.equals(userAuthorizationConfig.getLoggedUser())) return "non-authenticated";
+        model.addAttribute("userId", id);
+        List<Preset> preset = presetDAO.findPresetByUserId(id);
+        if (preset == null) return "myPresetsNUll";
+        model.addAttribute("preset-list", preset);
+        return "myPresets";
+    }
+
+//    @GetMapping("/login")
+//    public String showLoginPage() {
+//        return "login";
+//    }
+//    @RequestMapping("/non-authenticated")
+//    public String showAccessDenied() {
+//        return "non-authenticated";
+//    }
+
+
 }

@@ -10,47 +10,59 @@
 <h2 class="title">Create a Preset.</h2>
 <br>
 <form th:action="@{/processPreset}" th:object="${preset}" method="post">
-<h3 class="title">Preset name</h3>
-<div class="inputs">
-    <input type="text" th:field="*{name}" autocomplete="off">
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
-    <h3 class="inputs">IR</h3>
+    <h3 class="title">Preset name</h3>
+    <div class="container-inputs">
+        <input type="text" th:field="*{name}" autocomplete="off">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
+        <h3 class="inputs">IR</h3>
 
-    <input type="number" th:field="*{ir_cab}" autocomplete="off">
+        <input type="number" th:field="*{ir_cab}" autocomplete="off">
+        <span th:if="${#fields.hasErrors('ir_cab')}" th:errors="*{ir_cab}" class="error"></span>
 
-    <h3 class="inputs">Reverb</h3>
-    <input type="number" th:field="*{reverb}" autocomplete="off">
+        <h3 class="inputs">Reverb</h3>
+        <input type="number" th:field="*{reverb}" autocomplete="off">
+        <span th:if="${#fields.hasErrors('reverb')}" th:errors="*{reverb}" class="error"></span>
 
-    <h3 class="inputs">Preset</h3>
-    <input type="number" th:field="*{preset}" autocomplete="off">
+        <h3 class="inputs">Preset</h3>
+        <input type="number" th:field="*{preset}" autocomplete="off">
+        <span th:if="${#fields.hasErrors('preset')}" th:errors="*{preset}" class="error"></span>
 
-    <h3 class="inputs">Mix</h3>
-    <input type="number" th:field="*{mix}" autocomplete="off">
+        <h3 class="inputs">Mix</h3>
+        <input type="number" th:field="*{mix}" autocomplete="off">
+        <span th:if="${#fields.hasErrors('mix')}" th:errors="*{mix}" class="error"></span>
 
-    <h3 class="inputs">FB</h3>
-    <input type="number" th:field="*{fb}" autocomplete="off">
+        <h3 class="inputs">FB</h3>
+        <input type="number" th:field="*{fb}" autocomplete="off" >
+        <span th:if="${#fields.hasErrors('fb')}" th:errors="*{fb}" class="error"></span>
 
-    <h3 class="inputs">Time</h3>
-    <input type="number" th:field="*{time}" autocomplete="off">
+        <h3 class="inputs">Time</h3>
+        <input type="number" th:field="*{time}" autocomplete="off">
+        <span th:if="${#fields.hasErrors('time')}" th:errors="*{time}" class="error"></span>
 
-    <h3 class="inputs">Phase</h3>
-    <input type="number" th:field="*{mod}" autocomplete="off">
+        <h3 class="inputs">Phase</h3>
+        <input type="number" th:field="*{mod}" autocomplete="off">
+        <span th:if="${#fields.hasErrors('mod')}" th:errors="*{mod}" class="error"></span>
 
-    <h3 class="inputs">Tone</h3>
-    <input type="number" th:field="*{tone}" autocomplete="off">
+        <h3 class="inputs">Tone</h3>
+        <input type="number" th:field="*{tone}" autocomplete="off">
+        <span th:if="${#fields.hasErrors('tone')}" th:errors="*{tone}" class="error"></span>
 
-    <h3 class="inputs">Gain</h3>
-    <input type="number" th:field="*{gain}" autocomplete="off">
+        <h3 class="inputs">Gain</h3>
+        <input type="number" th:field="*{gain}" autocomplete="off">
+        <span th:if="${#fields.hasErrors('gain')}" th:errors="*{gain}" class="error"></span>
 
-    <h3 class="inputs">Type</h3>
-    <input type="number" th:field="*{type}" autocomplete="off">
+        <h3 class="inputs">Type</h3>
+        <input type="number" th:field="*{type}" autocomplete="off">
+        <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="error"></span>
 
-    <input type="hidden" name="id_user" th:value="${userId}" />
+        <input type="hidden" name="id_user" th:value="${userId}"/>
+        <br>
+    </div>
+    <a th:href="@{/}" class="bottom-buttons hyperlink">
+        <button type="submit" >Submit</button>
+    </a>
     <br>
-    <a th:href="@{/}"><button type="submit">Submit</button></a>
-    <br>
-    <a th:href="@{/}" class="anchor" rel="previous">Voltar.</a>
-    </form>
-</div>
+    <a th:href="@{/}" class="anchor bottom-buttons" rel="previous">Voltar.</a>
+</form>
 </body>
 </html>
